@@ -1,0 +1,5 @@
+# Ignore ALL files in .venv directory
+.venv/ 
+.vscode/
+playground.py
+app.py
