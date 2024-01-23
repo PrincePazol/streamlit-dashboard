@@ -3,8 +3,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+# Add a customized header to the app
+st.title(':rainbow[*Lightweight EDA Web App*]')
+
 # Add a title to the web App
-st.title('Uber pickups in NYC')
+st.header('Uber pickups in NYC❤️')
 
 # Create a date column variable
 DATE_COLUMN = 'date/time'
@@ -36,3 +39,29 @@ data = load_data(10000)
 
 # Notify the reader that the data was successfully loaded
 data_load_state.text('Done! (using st.cache_data)')
+
+# # Inspect the raw data
+# st.subheader(':rainbow[Raw data]', divider='rainbow')
+# st.write(data)
+if st.checkbox('Show raw data'):
+  st.subheader('Raw data')
+  st.write(data)
+
+# Subheader for histogram
+st.subheader('Number of pickups by hour')
+
+hist_values = np.histogram(
+  data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
+
+st.bar_chart(hist_values)
+
+# Time slider for filtering the DataFrame
+time_selected = st.slider('Choose time range 🕰️', 0, 24, 17)
+data_slider = data[data[DATE_COLUMN].dt.hour.eq(time_selected)]
+
+# Display the filtered dataframe
+data_slider
+
+# Visualize the dataset on a map
+st.subheader(f'Map of all pickups in NYC❤️ at {time_selected}:00')
+st.map(data_slider)
