@@ -65,3 +65,6 @@ data_slider
 # Visualize the dataset on a map
 st.subheader(f'Map of all pickups in NYC❤️ at {time_selected}:00')
 st.map(data_slider)
+
+# Outro
+st.write('# Made with 💝 by Prince Pazol😎')
